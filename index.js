@@ -1,7 +1,7 @@
 const express = require('express')
 const axios = require('axios')
 const app = express()
-app.get('/', (req, res) => {
+app.all('/', (req, res) => {
     console.log("Just got a request!")
     res.sendFile(__dirname, '/index.html')
 })
