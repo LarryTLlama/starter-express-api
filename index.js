@@ -1,17 +1,9 @@
-const express = require('express')
-const axios = require('axios')
-const app = express()
-app.get('/',function(req,res) {
-    res.sendFile(__dirname + '/index.html');
-  });
-app.get('/api/studios', (req, res) => {
-    axios.get('https://api.themeparks.wiki/preview/parks/UniversalStudiosFlorida/waittime')
-    .then((response) => {
-        res.json(response.data);
-        console.log(response.data);
-    })
-    .catch((err) => {
-        console.error(err);
-    })
+const http = require('http'),
+      httpProxy = require('http-proxy');
+
+httpProxy.createProxyServer().listen(process.env.PORT || 3000);
+
+http.createServer(function (req, res) {
+    res.writeHead(200, { 'Content-Type': 'text/plain'})
+    res.end()
 })
-app.listen(process.env.PORT || 3000)
