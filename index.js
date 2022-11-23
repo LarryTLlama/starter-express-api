@@ -1,9 +1,8 @@
-const http = require('http'),
-      httpProxy = require('http-proxy');
+const express = require('express');
+const { createProxyMiddleware } = require('http-proxy-middleware');
+const morgan = require("morgan")
+const app = express();
+app.use(morgan("dev"))
+app.use('/', createProxyMiddleware())
 
-httpProxy.createProxyServer().listen(process.env.PORT || 3000);
-
-http.createServer(function (req, res) {
-    res.writeHead(200, { 'Content-Type': 'text/plain'})
-    res.end()
-})
+app.listen(process.env.PORT || 3000)
